@@ -1,0 +1,31 @@
+#топ 10 контрагентов по выручке
+SELECT
+    Контрагент,
+    ROUND(SUM(Выручка_без_НДС), 2) AS Выручка
+FROM revenue
+GROUP BY Контрагент
+ORDER BY Выручка DESC
+LIMIT 10;
+#выручка по месяцам
+SELECT
+    strftime('%m', Дата) AS Месяц,
+    ROUND(SUM(Выручка_без_НДС), 2) AS Выручка
+FROM revenue
+GROUP BY Месяц
+ORDER BY Месяц;
+#структура затрат
+SELECT
+    Статья_затрат,
+    ROUND(SUM(Сумма_дебет), 2) AS Сумма
+FROM expenses
+GROUP BY Статья_затрат
+ORDER BY Сумма DESC;
+#затраты по годам
+SELECT
+    Год,
+    ROUND(SUM(Сумма_дебет), 2) AS Затраты
+FROM expenses
+GROUP BY Год;
+#итоговые показатели
+SELECT *
+FROM financial_results;
